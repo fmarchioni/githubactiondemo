@@ -33,13 +33,9 @@ jobs:
       run: mvn -B package --file pom.xml
 
     - name: Create "staging" directory if it doesn't exist
-      run: mkdir -p staging
-      
-    - name: Store JAR in "staging" directory
-      run: cp target/*.jar staging/      
-
-    - name: Upload JAR file as an artifact
-      uses: actions/upload-artifact@v1
+      run:  mkdir -p staging && cp target/*jar-with-dependencies.jar staging
+    - uses: actions/upload-artifact@v1
       with:
-        name: my-artifact
-        path: staging/*.jar      
+         name: Package
+         path: staging
+         
